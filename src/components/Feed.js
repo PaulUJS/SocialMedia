@@ -26,9 +26,6 @@ function Feed() {
     fetchPosts();
   }, []);
 
-  
-  
-
   return (
           posts.map(post => {
             return (
