@@ -1,9 +1,9 @@
 import React from 'react'
 
-function Posts({ key, posts }) {
+function Posts({ posts }) {
   return (
     <>
-      <div className='post-container' key={key}>
+      <div className='post-container'>
         <p>{posts.text}</p>  
       </div> 
     </>

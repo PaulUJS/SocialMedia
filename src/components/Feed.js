@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { firestore } from '../firebase/FirebaseServer';
 import { collection, getDocs } from "firebase/firestore";
-import { nanoid } from 'nanoid';
 
 import Posts from './Posts';
 import { Context } from '../context/PostsContext';
+import { Context as SessionContext } from '../context/SessionContext';
 
 function Feed() {
   const { posts, setPosts } = useContext(Context);
+  const { session, setSession } = useContext(SessionContext);
 
   const fetchPosts = async () => {
     // makes the reference for the firestore db
@@ -19,11 +20,12 @@ function Feed() {
         snapshot.docs.forEach((doc) => {
           post.push({ ...doc.data(), id: doc.id })
         })
-        setPosts(post)
+        setPosts(post);
       })
   };
 
   useEffect(() => {
+    console.log(session[0])
     fetchPosts();
   }, []);
 
