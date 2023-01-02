@@ -25,9 +25,15 @@ function Feed() {
   };
 
   useEffect(() => {
-    console.log(session[0])
+    const sessionStorage = localStorage.getItem('user');
+    console.log(JSON.parse(sessionStorage));
+    setSession(JSON.parse(sessionStorage));
     fetchPosts();
   }, []);
+
+  useEffect(() => {
+    console.log(session);
+  }, [session])
 
   return (
           posts.map(post => {

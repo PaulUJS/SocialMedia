@@ -18,7 +18,9 @@ function Redirect() {
         querySnapshot.forEach((doc) => {
           // doc.data() is never undefined for query doc snapshots
           console.log(doc, doc.data());
-          setSession([doc.data()]);
+          setSession(doc.data());
+          localStorage.setItem('user', JSON.stringify(doc.data()));
+          console.log(localStorage.getItem('user'))
           navigate('/feed');
         })
       }

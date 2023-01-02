@@ -2,11 +2,13 @@ import React, { useRef, useState, useContext, useEffect } from 'react';
 import { firestore } from '../firebase/FirebaseServer';
 import { addDoc, collection } from 'firebase/firestore';
 import { Context } from '../context/PostsContext';
+import { Context as SessionContext } from '../context/SessionContext';
 
 function PostForm() {
   const colRef = collection(firestore, 'posts');
   const postRef = useRef();
   const { posts, setPosts } = useContext(Context);
+  const { session, setSession } = useContext(SessionContext);
   const [next, setNext] = useState([]);
 
   const createPost = async (e) => {
@@ -14,7 +16,8 @@ function PostForm() {
     const post = postRef.current.value;
     const postText = {text: post}
     addDoc(colRef, {
-      text: post
+      text: post,
+      createdBy: session.username,
     })
       .then(() => {
         setNext(postText);
