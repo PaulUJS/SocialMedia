@@ -2,7 +2,13 @@ import React from 'react'
 
 function Register() {
   return (
-    <div>Register</div>
+    <>
+      <form className='registration-container'>
+        <label>Create a username</label>
+        <input type='text'/>
+        <button type='submit'>Create Account</button>
+      </form>
+    </>
   )
 }
 

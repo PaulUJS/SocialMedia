@@ -1,5 +1,4 @@
 import React from 'react';
-import { firestore } from '../firebase/FirebaseServer';
 
 import Feed from '../components/Feed';
 import Navbar from '../components/Navbar';

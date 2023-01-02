@@ -1,24 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { firestore } from '../firebase/FirebaseServer';
 import { collection, getDocs } from "firebase/firestore";
 import { nanoid } from 'nanoid';
+
 import Posts from './Posts';
+import { Context } from '../context/PostsContext';
 
 function Feed() {
-  const [posts, setPosts] = useState([]);
+  const { posts, setPosts } = useContext(Context);
 
   const fetchPosts = async () => {
     // makes the reference for the firestore db
-    const col = collection(firestore, 'posts');
+    const colRef = collection(firestore, 'posts');
     // grabs docs from posts and returns a promise
-    await getDocs(col)
+    await getDocs(colRef)
       .then((snapshot) => {
         let post = [];
         snapshot.docs.forEach((doc) => {
           post.push({ ...doc.data(), id: doc.id })
         })
         setPosts(post)
-        console.log(Posts)
       })
   };
 
