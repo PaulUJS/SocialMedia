@@ -6,15 +6,18 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 
 import { PostsContextProvider } from './context/PostsContext';
+import { SessionContextProvider } from './context/SessionContext';
 import Posts from './components/Posts';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <PostsContextProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </PostsContextProvider>
+  <SessionContextProvider>
+    <PostsContextProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </PostsContextProvider>
+  </SessionContextProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

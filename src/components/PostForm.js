@@ -7,7 +7,7 @@ function PostForm() {
   const colRef = collection(firestore, 'posts');
   const postRef = useRef();
   const { posts, setPosts } = useContext(Context);
-  const [prev, setPrev] = useState([]);
+  const [next, setNext] = useState([]);
 
   const createPost = async (e) => {
     e.preventDefault();
@@ -17,14 +17,14 @@ function PostForm() {
       text: post
     })
       .then(() => {
-        setPrev(postText);
+        setNext(postText);
         postRef.current.value = null;
       })
   }
 
   useEffect(() => {
-    setPosts([...posts, prev]);
-  }, [prev]);
+    setPosts([...posts, next]);
+  }, [next]);
 
   return (
     <>
