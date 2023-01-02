@@ -4,9 +4,10 @@ import './styles.css';
 
 import MainPage from './pages/MainPage';
 import LandingPage from './pages/LandingPage';
-import UsernameForm from './components/UsernameForm';
-import BioForm from './components/BioForm';
+import UsernameForm from './components/forms/UsernameForm';
+import BioForm from './components/forms/BioForm';
 import Redirect from './components/Redirect';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
         <Route path='/customize' element={<UsernameForm/>}/>
         <Route path='/bio' element={<BioForm/>}/>
         <Route path='/feed' element={<MainPage/>}/>
-        <Route path='/profile'/>
+        <Route path='/profile' element={<ProfilePage/>}/>
       </Routes>
     </>
   );

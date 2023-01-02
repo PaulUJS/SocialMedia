@@ -8,7 +8,7 @@ import { Context as SessionContext } from '../context/SessionContext';
 
 function Feed() {
   const { posts, setPosts } = useContext(Context);
-  const { session, setSession } = useContext(SessionContext);
+  const { session } = useContext(SessionContext);
 
   const fetchPosts = async () => {
     // makes the reference for the firestore db
@@ -25,9 +25,6 @@ function Feed() {
   };
 
   useEffect(() => {
-    const sessionStorage = localStorage.getItem('user');
-    console.log(JSON.parse(sessionStorage));
-    setSession(JSON.parse(sessionStorage));
     fetchPosts();
   }, []);
 

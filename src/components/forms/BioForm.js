@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
-import { Context as SessionContext } from '../context/SessionContext';
-import { firestore } from '../firebase/FirebaseServer';
+import { Context as SessionContext } from '../../context/SessionContext';
+import { firestore } from '../../firebase/FirebaseServer';
 import { addDoc, collection } from 'firebase/firestore';
 
 function BioForm() {

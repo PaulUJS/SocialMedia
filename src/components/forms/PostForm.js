@@ -1,8 +1,8 @@
 import React, { useRef, useState, useContext, useEffect } from 'react';
-import { firestore } from '../firebase/FirebaseServer';
-import { addDoc, collection } from 'firebase/firestore';
-import { Context } from '../context/PostsContext';
-import { Context as SessionContext } from '../context/SessionContext';
+import { firestore } from '../../firebase/FirebaseServer';
+import { addDoc, arrayUnion, collection, updateDoc, where, query, getDocs } from 'firebase/firestore';
+import { Context } from '../../context/PostsContext';
+import { Context as SessionContext } from '../../context/SessionContext';
 
 function PostForm() {
   const colRef = collection(firestore, 'posts');
@@ -14,15 +14,23 @@ function PostForm() {
   const createPost = async (e) => {
     e.preventDefault();
     const post = postRef.current.value;
-    const postText = {text: post}
-    addDoc(colRef, {
+    const postText = {
       text: post,
       createdBy: session.username,
-    })
+      likes: 0
+    }
+    addDoc(colRef, postText)
       .then(() => {
         setNext(postText);
-        postRef.current.value = null;
       })
+
+    const q = query(collection(firestore, 'Users'), where('uid', '==', `${session[0].uid}`))
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      updateDoc(doc, {
+        Posts: arrayUnion(postText)
+      })
+    })
   }
 
   useEffect(() => {
