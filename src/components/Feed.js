@@ -36,7 +36,7 @@ function Feed() {
           posts.map(post => {
             return (
               <>
-                  <Posts key={post.id} posts={post}/>
+                <Posts key={post.id} posts={post}/>
               </>
             )
           })
