@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { firestore } from '../../firebase/FirebaseServer';
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { updateDoc, doc } from "firebase/firestore";
 
-function Edit() {
+function Edit({ posts }) {
+  const [isShown, setIsShown] = useState(false);
+  const postRef = useRef();
+  const editPost = async (e) => {
+    e.preventDefault();
+    const post = postRef.current.value;
+    updateDoc(doc(firestore, 'posts', posts.id), {
+      text: post
+    })
+      .then(() => {
+        window.location.reload();
+      })
+  }
+
   return (
     <>
-      <form>
-        <button type='submit'>Edit</button>
-      </form>
+      <button onClick={() => setIsShown(!isShown)}>Edit</button>
+      {isShown && 
+        <form className='post-form' onSubmit={editPost}>
+          <textarea ref={postRef} placeholder='Write your Post'/>
+          <button type='submit'>Edit Post</button>
+        </form>
+      }
     </>
   )
 }

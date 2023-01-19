@@ -1,11 +1,19 @@
 import React from 'react';
 import { firestore } from '../../firebase/FirebaseServer';
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { deleteDoc, doc } from "firebase/firestore";
 
-function Delete() {
+
+function Delete({ posts }) {
+  const deletePost = async (e) => {
+    e.preventDefault();
+    deleteDoc(doc(firestore, 'posts', posts.id))
+      .then(() => {
+        window.location.reload();
+      })
+  }
   return (
     <>
-      <form>
+      <form onSubmit={deletePost}>
         <button type='submit'>Delete</button>
       </form>
     </>

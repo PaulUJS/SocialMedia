@@ -28,10 +28,6 @@ function Feed() {
     fetchPosts();
   }, []);
 
-  useEffect(() => {
-    console.log(session);
-  }, [session])
-
   return (
           posts.map(post => {
             return (

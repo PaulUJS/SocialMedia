@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { Context as SessionContext } from '../context/SessionContext';
 
 import Feed from '../components/Feed';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/navigation/Navbar';
 import Searchbar from '../components/forms/Searchbar';
 import PostForm from '../components/forms/PostForm';
 import ProfileDisplay from '../components/ProfileDisplay';

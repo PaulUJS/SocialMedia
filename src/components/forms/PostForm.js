@@ -17,7 +17,7 @@ function PostForm() {
     const postText = {
       text: post,
       createdBy: session.username,
-      likes: 0
+      Likes: 0
     }
     addDoc(colRef, postText)
       .then(() => {
